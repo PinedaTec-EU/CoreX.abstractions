@@ -414,8 +414,6 @@ public static class AppsHelper
         return retDict;
     }
 
-    private static Dictionary<string, int> _conditionCounters = new();
-
     /// <summary>
     /// Delays the execution of the action while the condition is true
     /// </summary>
@@ -454,15 +452,14 @@ public static class AppsHelper
             return false;
         }
 
-        logger.Info("[{0}]: Delayed while condition, timeout: [{1}ms]", caller, timeout.TotalMilliseconds);
+        var uid = Ulid.NewUlid();
+
+        logger.Info("[{1}|{0}]: Delayed while condition, timeout: [{2}ms]", caller, uid, timeout.TotalMilliseconds);
         var strAction = action.ToString();
-        logger.Debug("Condition: [{0}]", strAction);
+        logger.Debug("[{0}] Condition: [{1}]", uid, strAction);
 
         using var timer = new PeriodicTimer(TimeSpan.FromMilliseconds(peekingPeriod));
         bool result = false;
-
-        int uid = _conditionCounters.GetOrAdd(caller, 0) + 1;
-        _conditionCounters[caller] = uid;
 
         var compiledAction = action.Compile();
 
@@ -474,12 +471,12 @@ public static class AppsHelper
 
             if (result)
             {
-                logger.Debug("[{0}|{1}] While condition is true in {2}ms", caller, uid, sw.ElapsedMilliseconds);
+                logger.Debug("[{1}|{0}] While condition is true in {2}ms", caller, uid, sw.ElapsedMilliseconds);
                 return result;
             }
         }
 
-        logger.Debug("[{0}|{1}] Timeout {2}ms: While condition is false", caller, uid, timeout.TotalMilliseconds);
+        logger.Debug("[{1}|{0}] Timeout {2}ms: While condition is false", caller, uid, timeout.TotalMilliseconds);
         return result;
     }
 
