@@ -1,4 +1,4 @@
-#region Header
+﻿#region Header
 
 // --------------------------------------------------------------------------------------
 // Powered by:
@@ -30,9 +30,12 @@ using System.Collections;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
+using System.Net;
+using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
+
 using NLog;
 
 namespace ark.extensions;
@@ -634,4 +637,77 @@ public static class AppsHelper
 
     public static string EscapeJsonString(this string str) =>
         str.Replace("\"", "'");
+
+    /// <summary>
+    /// Waits for a port to be open on a host.
+    /// </summary>
+    /// <param name="host"></param>
+    /// <param name="port"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [OverloadResolutionPriority(1)]
+    public static Task<bool> WaitForPortAsync(string host, int port, CancellationToken cancellationToken = default) =>
+        WaitForPortAsync(host, port, 5000, 500, cancellationToken);
+
+    /// <summary>
+    /// Waits for a port to be open on a host.
+    /// </summary>
+    /// <param name="host"></param>
+    /// <param name="port"></param>
+    /// <param name="timeout"></param>
+    /// <param name="retryInterval"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [OverloadResolutionPriority(2)]
+    public static Task<bool> WaitForPortAsync(string host, int port, int timeout = 5000, int retryInterval = 500, CancellationToken cancellationToken = default)
+    {
+        var logger = LogManager.GetCurrentClassLogger();
+
+        logger.Info("Waiting for port [{0}] on host [{1}]", port, host);
+
+        DateTime endTime = DateTime.Now.AddMilliseconds(timeout);
+
+        while (DateTime.Now < endTime)
+        {
+            try
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                using TcpClient client = new();
+
+                var result = client.BeginConnect(host, port, null, null);
+                bool success = result.AsyncWaitHandle.WaitOne(retryInterval);
+
+                if (success && client.Connected)
+                {
+                    logger.Debug("Port [{0}] on host [{1}] is open", port, host);
+
+                    client.EndConnect(result);
+                    return Task.FromResult(true);
+                }
+            }
+            catch (SocketException)
+            {
+                // Ignorar la excepción y esperar antes de reintentar } 
+                Thread.Sleep(retryInterval);
+            }
+        }
+
+        logger.Debug("Timeout waiting for port [{0}] on host [{1}]", port, host);
+        return Task.FromResult(false);
+    }
+
+    /// <summary>
+    /// Gets a random free port.
+    /// </summary>
+    /// <returns></returns>
+    public static int GetRandomFreePort()
+    {
+        var listener = new TcpListener(IPAddress.Loopback, 0);
+        listener.Start();
+        var port = ((IPEndPoint)listener.LocalEndpoint).Port;
+        listener.Stop();
+
+        return port;
+    }
 }
