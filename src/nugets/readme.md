@@ -1,11 +1,13 @@
-# FlexiSphere
+# Ark abstractions
 
-This component is similar to the public component Quartz, We will discuss the differences between Quartz and FlexiSphere later
-I used to design and build these kinds of tools/components to learn how to create them and to tailor the behaviors to more specific needs.
+## Ark extensions
 
-So, this component left aside:
+A bundle of extensions helper to achievement a better coding experience
 
-- the persistence logic, but if you want to extend this behavior, is easy to accomplish, using OnBeforeJob, OnAfterjob
-- The logging configuration, We use ILogger (NLog), and you can configure it to change the trace level, or the logging destination, GrayLog, console, file, etc
+## Ark providers
 
-Checks project documents [README.md](https://github.com/PinedaTec-EU/FlexiSphere/blob/main/README.md)
+A bundle of components that make stranger stuffs
+
+- TemplateTagBuilder: A component that replaces (using regex) variables into a string, using a dictionary as variable list.
+
+Checks project documents [README.md](https://github.com/PinedaTec-EU/ark.abstractions/blob/main/README.md)

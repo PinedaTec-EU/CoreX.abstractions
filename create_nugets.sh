@@ -19,7 +19,11 @@ echo "$new_version" > version.nfo
 echo "La nueva versión es: $new_version"
 
 # Crear el release
-dotnet build -c Release
+dotnet build -c Release -p:Version=$new_version
 
 # Crear el paquete NuGet
 nuget pack src/ark.extensions/.nuspec -Version $new_version -outputdirectory ./nugets
+nuget pack src/ark.providers/.nuspec -Version $new_version -outputdirectory ./nugets
+
+# Publicar el paquete NuGet to local folder
+cp ./nugets/ark.*.$new_version.nupkg ../nugets

@@ -32,6 +32,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -595,6 +596,13 @@ public static class AppsHelper
         return acronim.ToLower();
     }
 
+    /// <summary>
+    /// Checks if a string contains any of the values in the array
+    /// </summary>
+    /// <param name="str"></param>
+    /// <param name="values"></param>
+    /// <param name="comparisonType"></param>
+    /// <returns></returns>
     public static bool Contains(this string str, string[] values, StringComparison comparisonType = StringComparison.InvariantCultureIgnoreCase) =>
         values.Any(v => str.Contains(v, comparisonType));
 
@@ -635,6 +643,11 @@ public static class AppsHelper
     public static string ToEnabledDisabled(this bool value) =>
         value ? "enabled" : "disabled";
 
+    /// <summary>
+    /// Escapes a string to be used in a JSON string
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
     public static string EscapeJsonString(this string str) =>
         str.Replace("\"", "'");
 
@@ -709,5 +722,36 @@ public static class AppsHelper
         listener.Stop();
 
         return port;
+    }
+
+    /// <summary>
+    /// Gets the application version.
+    /// </summary>
+    /// <returns></returns>
+    public static Version GetAppVersion() =>
+        new(Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyFileVersionAttribute>()!.Version);
+
+    /// <summary>
+    /// Generates a random string.
+    /// </summary>
+    /// <param name="length"></param>
+    /// <returns></returns>
+    public static string GenerateRandomString(int length)
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        byte[] randomBytes = new byte[length];
+
+        using (var rng = RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(randomBytes);
+        }
+
+        StringBuilder result = new StringBuilder(length);
+        foreach (byte b in randomBytes)
+        {
+            result.Append(chars[b % chars.Length]);
+        }
+
+        return result.ToString();
     }
 }

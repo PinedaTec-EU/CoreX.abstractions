@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+	<metadata>
+		<id>ark.providers</id>
+		<version>0.0.1</version>
+		<authors>jmr.pineda@pinedatec.eu</authors>
+		<owners>PinedaTec.EU</owners>
+		<title>ARK providers</title>
+		<requireLicenseAcceptance>true</requireLicenseAcceptance>
+		<description>Custom providers</description>
+		<copyright>PinedaTec.EU</copyright>
+		<readme>doc/readme.md</readme>
+		<icon>images/pinedatec.eu.logo.png</icon>
+		<tags>ark pinedatec pinedatec abstractions providers</tags>
+		<repository type="git" url="https://github.com/PinedaTec-EU/ark.abstractions.git" branch="main" />
+		<license type="file">LICENSE</license>
+		<dependencies>
+			<group targetFramework=".NETCoreApp9.0">
+				<dependency id="NLog" version="5.3.4" />
+				<dependency id="Ulid" version="1.3.4" />
+				<dependency id="Microsoft.Extensions.Configuration" version="9.0.1" />
+				<dependency id="Microsoft.Extensions.Configuration.Abstractions" version="9.0.1" />
+				<dependency id="Microsoft.Extensions.Configuration.FileExtensions" version="9.0.1" />
+				<dependency id="Microsoft.Extensions.Configuration.Json" version="9.0.1" />
+				<dependency id="Microsoft.Extensions.DependencyInjection" version="9.0.1" />
+				<dependency id="Microsoft.Extensions.Hosting.Abstractions" version="9.0.1" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="bin/release/net9.0/ark.providers.dll" target="lib\netcoreapp9.0" />
+		<file src="../nugets/readme.md" target="doc/readme.md" />
+		<file src="../nugets/pinedatec.eu.logo.png" target="images/pinedatec.eu.logo.png" />
+		<file src="../../LICENSE" target="LICENSE" />
+	</files>
+</package>
