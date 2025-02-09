@@ -468,7 +468,8 @@ public static class AppsHelper
     /// <param name="cancellationToken"></param>
     /// <param name="caller"></param>
     /// <returns></returns>
-    public static async Task<bool> DelayWhileAsync(TimeSpan timeout, Expression<Func<bool>> action, int peekingPeriod = 250, CancellationToken cancellationToken = default, [ConstantExpected][CallerMemberName] string caller = "")
+    public static async Task<bool> DelayWhileAsync(TimeSpan timeout, Expression<Func<bool>> action, int peekingPeriod = 250, CancellationToken cancellationToken = default,
+        [ConstantExpected][CallerMemberName] string caller = "")
     {
         var logger = LogManager.GetCurrentClassLogger();
         var sw = Stopwatch.StartNew();
@@ -725,11 +726,11 @@ public static class AppsHelper
     }
 
     /// <summary>
-    /// Gets the application version.
+    /// Gets the application version, using EntryAssembly or CallingAssembly.
     /// </summary>
     /// <returns></returns>
     public static Version GetAppVersion() =>
-        new(Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyFileVersionAttribute>()!.Version);
+        new((Assembly.GetEntryAssembly() ?? Assembly.GetCallingAssembly()).GetCustomAttribute<AssemblyFileVersionAttribute>()!.Version);
 
     /// <summary>
     /// Generates a random string.
