@@ -41,12 +41,12 @@
             },
             {
                 "logger": "*",
-                "minLevel": "Debug",
+                "minLevel": "Trace",
                 "writeTo": "logconsole"
             },
             {
                 "logger": "*",
-                "minLevel": "Debug",
+                "minLevel": "Trace",
                 "writeTo": "logfile"
             }
         ]

@@ -26,6 +26,7 @@
 
 #endregion
 
+using ark.aspects;
 using Microsoft.Extensions.Configuration;
 
 using NLog;

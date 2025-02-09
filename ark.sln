@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ark.abstractions.test", "te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ark.providers", "src\ark.providers\ark.providers.csproj", "{DEBFC3FB-10FC-4A6A-BBDE-FAB420E35621}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ark.aspects", "src\ark.aspects\ark.aspects.csproj", "{141591F5-71DC-4250-86E3-21069BA1553E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,10 +36,15 @@ Global
 		{DEBFC3FB-10FC-4A6A-BBDE-FAB420E35621}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEBFC3FB-10FC-4A6A-BBDE-FAB420E35621}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEBFC3FB-10FC-4A6A-BBDE-FAB420E35621}.Release|Any CPU.Build.0 = Release|Any CPU
+		{141591F5-71DC-4250-86E3-21069BA1553E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{141591F5-71DC-4250-86E3-21069BA1553E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{141591F5-71DC-4250-86E3-21069BA1553E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{141591F5-71DC-4250-86E3-21069BA1553E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4E46F18B-BF25-47AE-9C28-50D5192F5DAC} = {BA8889F5-0A93-4194-970F-75F0A9140725}
 		{1A24AE1D-87E8-4DFC-817A-2A890B3ACB9A} = {13F93F77-E731-40D4-8C8E-185D546E4FB7}
 		{DEBFC3FB-10FC-4A6A-BBDE-FAB420E35621} = {BA8889F5-0A93-4194-970F-75F0A9140725}
+		{141591F5-71DC-4250-86E3-21069BA1553E} = {BA8889F5-0A93-4194-970F-75F0A9140725}
 	EndGlobalSection
 EndGlobal

@@ -27,10 +27,14 @@
 #endregion
 
 using System.Globalization;
+
+using Microsoft.Extensions.Configuration;
+
 using ark.abstractions.test;
 using ark.providers;
-using Microsoft.Extensions.Configuration;
+
 using Moq;
+
 using Shouldly;
 
 namespace providers;
