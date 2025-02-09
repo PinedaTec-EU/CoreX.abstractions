@@ -39,6 +39,7 @@ using Microsoft.Extensions.Configuration;
 using ark.extensions;
 
 using NLog;
+using ark.aspects;
 
 public class TemplateTagsBuilder : ITemplateTagsBuilder
 {
@@ -111,12 +112,13 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
         return dict;
     }
 
+    [NLogExecutionTimeAttribute]
     public string Parse(string expression, Dictionary<string, object?>? tagValues = null, IConfigurationSection? section = null,
         bool exceptionNotResolved = false, Func<string, string, string, string>? cryptoProvider = null) =>
         this.Parse(expression, 0, tagValues, section, exceptionNotResolved, cryptoProvider);
 
     private string Parse(string expression, int iteration, Dictionary<string, object?>? tagValues = null, IConfigurationSection? section = null,
-        bool exceptionNotResolved = false, Func<string, string, string, string>? cryptoProvider = null)
+           bool exceptionNotResolved = false, Func<string, string, string, string>? cryptoProvider = null)
     {
         _logger.Trace($"Parsing expression");
 

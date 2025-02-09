@@ -26,10 +26,13 @@
 
 #endregion
 
-namespace ark.providers;
+using ark.aspects;
 
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
+
+[module: NLogExecutionTimeAttribute]
+
+namespace ark.providers;
 
 public static class ProviderExtensions
 {
