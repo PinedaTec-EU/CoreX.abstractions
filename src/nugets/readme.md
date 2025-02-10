@@ -35,8 +35,4 @@ The **TemplateTagsBuilder** is a utility designed to facilitate the creation and
 
 ## NLogExecutionTimeAttribute
 
-The `NLogExecutionTimeAttribute` is used to log the execution time of methods using NLog. To use this attribute, you need to include `[module: NLogExecutionTimeAttribute]` in some file of the project that will use it.
-
-### Requirements
-
-- Nuget: `methoddecorator.fody`
+The `NLogExecutionTimeAttribute` is used to log the execution time of methods using NLog. To use this attribute, you need to include `[module: NLogExecutionTimeAttribute]` in one file of the project that will use it.

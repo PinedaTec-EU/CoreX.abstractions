@@ -36,10 +36,10 @@ using System.Text.RegularExpressions;
 
 using Microsoft.Extensions.Configuration;
 
+using ark.aspects;
 using ark.extensions;
 
 using NLog;
-using ark.aspects;
 
 public class TemplateTagsBuilder : ITemplateTagsBuilder
 {

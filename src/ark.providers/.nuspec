@@ -31,6 +31,7 @@
 	</metadata>
 	<files>
 		<file src="bin/release/net9.0/ark.providers.dll" target="lib\netcoreapp9.0" />
+		<file src="bin/release/net9.0/ark.aspects.dll" target="lib\netcoreapp9.0" />
 		<file src="../nugets/readme.md" target="doc/readme.md" />
 		<file src="../nugets/pinedatec.eu.logo.png" target="images/pinedatec.eu.logo.png" />
 		<file src="../../LICENSE" target="LICENSE" />

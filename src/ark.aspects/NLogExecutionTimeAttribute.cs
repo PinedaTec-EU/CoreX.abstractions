@@ -51,19 +51,63 @@ public class NLogExecutionTimeAttribute : Attribute, IMethodDecorator
     private string _methodDeclaringType = string.Empty;
     private string _methodName = string.Empty;
 
+    private LogLevel _level = LogLevel.Trace;
     private bool _logOnInit = true;
     private bool _logOnExit = true;
     private bool _logOnException = true;
     private bool _logOnEntry = false;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NLogExecutionTimeAttribute"/> class.
+    /// </summary>
+    /// <param name="logger">Custom logger to use</param>
+    /// <param name="level">Log level to use when required</param>
+    /// <param name="logOnInit">When unset, disables the log for OnInit method</param>
+    /// <param name="logOnEntry">When unset, disables the log for OnEntry method</param>
+    /// <param name="logOnExit">When unset, disables the log for the OnExit method</param>
+    /// <param name="logOnException">When unset, disables the log for theOnException method</param>
+    public NLogExecutionTimeAttribute(ILogger logger, LogLevel level, bool logOnInit = true, bool logOnEntry = false, bool logOnExit = true, bool logOnException = true)
+     : this(level, logOnInit, logOnEntry, logOnExit, logOnException)
+    {
+        _logger = logger;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NLogExecutionTimeAttribute"/> class. 
+    /// </summary>
+    /// <param name="logger">Custom logger to use</param>
+    /// <param name="logOnInit">When unset, disables the log for OnInit method</param>
+    /// <param name="logOnEntry">When unset, disables the log for OnEntry method</param>
+    /// <param name="logOnExit">When unset, disables the log for the OnExit method</param>
+    /// <param name="logOnException">When unset, disables the log for theOnException method</param>
     public NLogExecutionTimeAttribute(ILogger logger, bool logOnInit = true, bool logOnEntry = false, bool logOnExit = true, bool logOnException = true)
         : this(logOnInit, logOnEntry, logOnExit, logOnException)
     {
         _logger = logger;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NLogExecutionTimeAttribute"/> class. 
+    /// </summary>
+    /// <param name="logOnInit">When unset, disables the log for OnInit method</param>
+    /// <param name="logOnEntry">When unset, disables the log for OnEntry method</param>
+    /// <param name="logOnExit">When unset, disables the log for the OnExit method</param>
+    /// <param name="logOnException">When unset, disables the log for theOnException method</param>
     public NLogExecutionTimeAttribute(bool logOnInit = true, bool logOnEntry = false, bool logOnExit = true, bool logOnException = true)
+        : this(LogLevel.Trace, logOnInit, logOnEntry, logOnExit, logOnException)
+    { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NLogExecutionTimeAttribute"/> class.
+    /// </summary>
+    /// <param name="level">Log level to use when required</param>
+    /// <param name="logOnInit">When unset, disables the log for OnInit method</param>
+    /// <param name="logOnEntry">When unset, disables the log for OnEntry method</param>
+    /// <param name="logOnExit">When unset, disables the log for the OnExit method</param>
+    /// <param name="logOnException">When unset, disables the log for theOnException method</param> 
+    public NLogExecutionTimeAttribute(LogLevel level, bool logOnInit = true, bool logOnEntry = false, bool logOnExit = true, bool logOnException = true)
     {
+        _level = level;
         _logOnInit = logOnInit;
         _logOnEntry = logOnEntry;
         _logOnExit = logOnExit;
@@ -83,7 +127,7 @@ public class NLogExecutionTimeAttribute : Attribute, IMethodDecorator
 
         LogEventInfo logEvent;
         var message = $"[{_letId}] Operation [{_methodDeclaringType}.{_methodName}] executing";
-        logEvent = new LogEventInfo(LogLevel.Trace, _logger.Name, message);
+        logEvent = new LogEventInfo(_level, _logger.Name, message);
 
         _logger.Log(typeof(NLogExecutionTimeAttribute), logEvent);
     }
@@ -97,7 +141,7 @@ public class NLogExecutionTimeAttribute : Attribute, IMethodDecorator
 
         LogEventInfo logEvent;
         var message = $"[{_letId}] Operation [{_methodDeclaringType}.{_methodName}] started";
-        logEvent = new LogEventInfo(LogLevel.Trace, _logger.Name, message);
+        logEvent = new LogEventInfo(_level, _logger.Name, message);
 
         _logger.Log(typeof(NLogExecutionTimeAttribute), logEvent);
     }
@@ -112,7 +156,7 @@ public class NLogExecutionTimeAttribute : Attribute, IMethodDecorator
         }
 
         var message = $"[{_letId}] Operation [{_methodDeclaringType}.{_methodName}] completed in {_stopwatch.ElapsedMilliseconds} ms";
-        LogEventInfo logEvent = new LogEventInfo(LogLevel.Trace, _logger.Name, message);
+        LogEventInfo logEvent = new LogEventInfo(_level, _logger.Name, message);
 
         _logger.Log(typeof(NLogExecutionTimeAttribute), logEvent);
     }
