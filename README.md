@@ -13,9 +13,7 @@ This project contains several useful extensions for working with collections, st
 
 ### Components
 
-- **CollectionExtensions**: Extension methods for working with collections.
-- **StringExtensions**: Extension methods for manipulating strings.
-- **DateTimeExtensions**: Extension methods for working with dates and times.
+- Extensions to provide code-snippets, like throws an exception if the instance is null, or some boolean is false.
 
 ## ark.providers
 

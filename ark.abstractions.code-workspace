@@ -6,7 +6,6 @@
 	],
 	"settings": {
 		"dotnet.defaultSolution": "ark.sln",
-		"logViewer.options": {},
 		"logViewer.watch": [
 			{
 				"title": "NLog internal",

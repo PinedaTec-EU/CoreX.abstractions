@@ -11,7 +11,7 @@
 //                   \/     \/     \/     \/           \/     \/  \/     \/
 // 
 // 
-// FileName: ProviderExtensions.cs
+// FileName: globals.cs
 //
 // Author:   jmr.pineda
 // eMail:    jmr.pineda@pinedatec.eu
@@ -20,27 +20,12 @@
 //           Copyrights (c) PinedaTec.eu 2025, all rights reserved.
 //           CC BY-NC-ND - https://creativecommons.org/licenses/by-nc-nd/4.0
 //
-//  Created at: 2025-02-07T10:24:27.181Z
+//  Created at: 2025-02-10T12:31:13.195Z
 //
 // --------------------------------------------------------------------------------------
 
 #endregion
 
-using Microsoft.Extensions.DependencyInjection;
+global using ark.aspects;
 
-namespace ark.providers;
-
-public static class ProviderExtensions
-{
-    /// <summary>
-    /// Add Ark Providers
-    /// </summary>
-    /// <param name="services"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddArkProviders(this IServiceCollection services)
-    {
-        services.AddTransient<ITemplateTagsBuilder, TemplateTagsBuilder>();
-
-        return services;
-    }
-}
+[module: NLogExecutionTimeAttribute]

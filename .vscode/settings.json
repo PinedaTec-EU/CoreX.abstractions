@@ -1,3 +1,4 @@
 {
-    "dotnet.defaultSolution": "ark.sln"
+    "dotnet.defaultSolution": "ark.sln",
+    "logViewer.watch": []
 }
