@@ -27,8 +27,8 @@
 #endregion
 
 using System.Text;
-using ark.abstractions.test;
-using ark.extensions;
+using CoreX.abstractions.test;
+using CoreX.extensions;
 
 using Shouldly;
 

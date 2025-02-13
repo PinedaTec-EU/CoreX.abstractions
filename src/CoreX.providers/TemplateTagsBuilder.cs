@@ -26,7 +26,7 @@
 
 #endregion
 
-namespace ark.providers;
+namespace CoreX.providers;
 
 using System.Globalization;
 using System.Linq;
@@ -36,8 +36,8 @@ using System.Text.RegularExpressions;
 
 using Microsoft.Extensions.Configuration;
 
-using ark.aspects;
-using ark.extensions;
+using CoreX.aspects;
+using CoreX.extensions;
 
 using NLog;
 

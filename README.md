@@ -1,13 +1,13 @@
-# ark.abstractions
+# CoreX.abstractions
 
 Abstractions, extensions
 
 ## Nugets
 
-- ark.extensions
-- ark.providers
+- CoreX.extensions
+- CoreX.providers
 
-## ark.extensions
+## CoreX.extensions
 
 This project contains several useful extensions for working with collections, strings, and other common .NET data types.
 
@@ -15,7 +15,7 @@ This project contains several useful extensions for working with collections, st
 
 - Extensions to provide code-snippets, like throws an exception if the instance is null, or some boolean is false.
 
-## ark.providers
+## CoreX.providers
 
 This project provides implementations of providers for different services and functionalities.
 

@@ -5,15 +5,15 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA8889F5-0A93-4194-970F-75F0A9140725}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ark.extensions", "src\ark.extensions\ark.extensions.csproj", "{4E46F18B-BF25-47AE-9C28-50D5192F5DAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreX.extensions", "src\CoreX.extensions\CoreX.extensions.csproj", "{4E46F18B-BF25-47AE-9C28-50D5192F5DAC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{13F93F77-E731-40D4-8C8E-185D546E4FB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ark.abstractions.test", "test\ark.abstractions.test\ark.abstractions.test.csproj", "{1A24AE1D-87E8-4DFC-817A-2A890B3ACB9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreX.abstractions.test", "test\CoreX.abstractions.test\CoreX.abstractions.test.csproj", "{1A24AE1D-87E8-4DFC-817A-2A890B3ACB9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ark.providers", "src\ark.providers\ark.providers.csproj", "{DEBFC3FB-10FC-4A6A-BBDE-FAB420E35621}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreX.providers", "src\CoreX.providers\CoreX.providers.csproj", "{DEBFC3FB-10FC-4A6A-BBDE-FAB420E35621}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ark.aspects", "src\ark.aspects\ark.aspects.csproj", "{141591F5-71DC-4250-86E3-21069BA1553E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreX.aspects", "src\CoreX.aspects\CoreX.aspects.csproj", "{141591F5-71DC-4250-86E3-21069BA1553E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

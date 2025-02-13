@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
-		<id>ark.providers</id>
+		<id>CoreX.providers</id>
 		<version>0.0.1</version>
 		<authors>jmr.pineda@pinedatec.eu</authors>
 		<owners>PinedaTec.EU</owners>
-		<title>ARK providers</title>
+		<title>CoreX providers</title>
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
 		<description>Custom providers</description>
 		<copyright>PinedaTec.EU</copyright>
 		<readme>doc/readme.md</readme>
 		<icon>images/pinedatec.eu.logo.png</icon>
-		<tags>ark pinedatec pinedatec abstractions providers</tags>
+		<tags>CoreX pinedatec pinedatec abstractions providers</tags>
 		<repository type="git" url="https://github.com/PinedaTec-EU/ark.abstractions.git" branch="main" />
 		<license type="file">LICENSE</license>
 		<dependencies>
@@ -30,8 +30,8 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="bin/release/net9.0/ark.providers.dll" target="lib\netcoreapp9.0" />
-		<file src="bin/release/net9.0/ark.aspects.dll" target="lib\netcoreapp9.0" />
+		<file src="bin/release/net9.0/CoreX.providers.dll" target="lib\netcoreapp9.0" />
+		<file src="bin/release/net9.0/CoreX.aspects.dll" target="lib\netcoreapp9.0" />
 		<file src="../../README.md" target="doc/readme.md" />
 		<file src="../nugets/pinedatec.eu.logo.png" target="images/pinedatec.eu.logo.png" />
 		<file src="../../LICENSE" target="LICENSE" />

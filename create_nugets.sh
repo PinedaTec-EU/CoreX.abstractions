@@ -22,8 +22,8 @@ echo "La nueva versión es: $new_version"
 dotnet build -c Release -p:Version=$new_version
 
 # Crear el paquete NuGet
-nuget pack src/ark.extensions/.nuspec -Version $new_version -outputdirectory ./nugets
-nuget pack src/ark.providers/.nuspec -Version $new_version -outputdirectory ./nugets
+nuget pack src/CoreX.extensions/.nuspec -Version $new_version -outputdirectory ./nugets
+nuget pack src/CoreX.providers/.nuspec -Version $new_version -outputdirectory ./nugets
 
 # Publicar el paquete NuGet to local folder
-cp ./nugets/ark.*.$new_version.nupkg ../nugets
+cp ./nugets/CoreX.*.$new_version.nupkg ../nugets

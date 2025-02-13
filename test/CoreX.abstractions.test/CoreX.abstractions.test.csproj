@@ -43,10 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ark.extensions\ark.extensions.csproj" />
-    <ProjectReference Include="..\..\src\kpax1.framework\kpax1.framework.csproj" />
-    <ProjectReference Include="..\..\src\ark.providers\ark.providers.csproj" />
-    <ProjectReference Include="..\..\src\ark.aspects\ark.aspects.csproj" />
+    <ProjectReference Include="..\..\src\CoreX.extensions\CoreX.extensions.csproj" />
+    <ProjectReference Include="..\..\src\CoreX.providers\CoreX.providers.csproj" />
+    <ProjectReference Include="..\..\src\CoreX.aspects\CoreX.aspects.csproj" />
   </ItemGroup>
 
 </Project>

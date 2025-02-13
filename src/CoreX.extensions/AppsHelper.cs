@@ -39,7 +39,7 @@ using System.Text;
 
 using NLog;
 
-namespace ark.extensions;
+namespace CoreX.extensions;
 
 [DebuggerStepThrough]
 public static class AppsHelper

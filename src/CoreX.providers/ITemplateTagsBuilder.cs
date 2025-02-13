@@ -28,7 +28,7 @@
 
 using Microsoft.Extensions.Configuration;
 
-namespace ark.providers;
+namespace CoreX.providers;
 
 public interface ITemplateTagsBuilder
 {

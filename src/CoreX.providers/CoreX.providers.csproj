@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ark.aspects\ark.aspects.csproj" />
-    <ProjectReference Include="..\ark.extensions\ark.extensions.csproj" />
+    <ProjectReference Include="..\CoreX.aspects\CoreX.aspects.csproj" />
+    <ProjectReference Include="..\CoreX.extensions\CoreX.extensions.csproj" />
   </ItemGroup>
 </Project>

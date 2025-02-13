@@ -30,8 +30,8 @@ using System.Globalization;
 
 using Microsoft.Extensions.Configuration;
 
-using ark.abstractions.test;
-using ark.providers;
+using CoreX.abstractions.test;
+using CoreX.providers;
 
 using Moq;
 

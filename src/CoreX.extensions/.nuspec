@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
-		<id>ark.extensions</id>
+		<id>CoreX.extensions</id>
 		<version>0.0.1</version>
 		<authors>jmr.pineda@pinedatec.eu</authors>
 		<owners>PinedaTec.EU</owners>
-		<title>ARK Extensions</title>
+		<title>CoreX Extensions</title>
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
 		<description>Extensions methods</description>
 		<copyright>PinedaTec.EU</copyright>
 		<readme>doc/readme.md</readme>
 		<icon>images/pinedatec.eu.logo.png</icon>
-		<tags>ark pinedatec pinedatec abstractions extensions</tags>
-		<repository type="git" url="https://github.com/PinedaTec-EU/ark.abstractions.git" branch="main" />
+		<tags>CoreX pinedatec pinedatec abstractions extensions</tags>
+		<repository type="git" url="https://github.com/PinedaTec-EU/CoreX.abstractions.git" branch="main" />
 		<license type="file">LICENSE</license>
 		<dependencies>
 			<group targetFramework=".NETCoreApp9.0">
@@ -22,8 +22,8 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="bin/release/net9.0/ark.extensions.dll" target="lib\netcoreapp9.0" />
-		<file src="bin/release/net9.0/ark.aspects.dll" target="lib\netcoreapp9.0" />
+		<file src="bin/release/net9.0/CoreX.extensions.dll" target="lib\netcoreapp9.0" />
+		<file src="bin/release/net9.0/CoreX.aspects.dll" target="lib\netcoreapp9.0" />
 		<file src="../../README.md" target="doc/readme.md" />
 		<file src="../nugets/pinedatec.eu.logo.png" target="images/pinedatec.eu.logo.png" />
 		<file src="../../LICENSE" target="LICENSE" />

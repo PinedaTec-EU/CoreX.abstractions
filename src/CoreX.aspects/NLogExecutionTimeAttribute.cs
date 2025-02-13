@@ -33,7 +33,7 @@ using MethodDecorator.Fody.Interfaces;
 
 using NLog;
 
-namespace ark.aspects;
+namespace CoreX.aspects;
 
 /// <summary>
 /// Aspect that logs the execution time of a method.

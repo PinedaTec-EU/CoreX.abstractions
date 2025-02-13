@@ -11,7 +11,7 @@
 //                   \/     \/     \/     \/           \/     \/  \/     \/
 // 
 // 
-// FileName: TestException.cs
+// FileName: ProviderExtensions.cs
 //
 // Author:   jmr.pineda
 // eMail:    jmr.pineda@pinedatec.eu
@@ -20,27 +20,27 @@
 //           Copyrights (c) PinedaTec.eu 2025, all rights reserved.
 //           CC BY-NC-ND - https://creativecommons.org/licenses/by-nc-nd/4.0
 //
-//  Created at: 2025-02-07T00:41:48.096Z
+//  Created at: 2025-02-07T10:24:27.181Z
 //
 // --------------------------------------------------------------------------------------
 
 #endregion
 
-namespace ark.abstractions.test;
+using Microsoft.Extensions.DependencyInjection;
 
-public class TestException : ApplicationException
+namespace CoreX.providers;
+
+public static class ProviderExtensions
 {
-    public TestException()
+    /// <summary>
+    /// Add CoreX Providers
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddCoreXProviders(this IServiceCollection services)
     {
-    }
+        services.AddTransient<ITemplateTagsBuilder, TemplateTagsBuilder>();
 
-    public TestException(string? message)
-        : base(message)
-    {
-    }
-
-    public TestException(string? message, Exception? innerException)
-        : base(message, innerException)
-    {
+        return services;
     }
 }

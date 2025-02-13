@@ -26,13 +26,13 @@
 
 #endregion
 
-using ark.aspects;
+using CoreX.aspects;
 using Microsoft.Extensions.Configuration;
 
 using NLog;
 using NLog.Extensions.Logging;
 
-namespace ark.abstractions.test;
+namespace CoreX.abstractions.test;
 
 public class TestFixture : IDisposable
 {

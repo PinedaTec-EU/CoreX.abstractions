@@ -28,8 +28,8 @@
 
 using System.Reflection;
 
-using ark.abstractions.test;
-using ark.aspects;
+using CoreX.abstractions.test;
+using CoreX.aspects;
 
 using Moq;
 

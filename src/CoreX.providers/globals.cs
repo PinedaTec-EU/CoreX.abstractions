@@ -26,6 +26,6 @@
 
 #endregion
 
-global using ark.aspects;
+global using CoreX.aspects;
 
 [module: NLogExecutionTimeAttribute]

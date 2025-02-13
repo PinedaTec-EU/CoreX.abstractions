@@ -12,6 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ark.aspects\ark.aspects.csproj" />
+    <ProjectReference Include="..\CoreX.aspects\CoreX.aspects.csproj" />
   </ItemGroup>
 </Project>
