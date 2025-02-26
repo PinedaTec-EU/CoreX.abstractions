@@ -406,7 +406,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var tagValues = templateTagsBuilder.GetStandardTags();
         tagValues.Add("some.values", "testing");
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -422,7 +422,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${RandomNumber:[10]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         for (int ndx = 0; ndx != 10; ndx++)
         {
             var result = templateTagsBuilder.Parse(expression, tagValues);
@@ -444,7 +444,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${RandomNumber:[10,100]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         for (int ndx = 0; ndx != 10; ndx++)
         {
             var result = templateTagsBuilder.Parse(expression, tagValues);
@@ -466,7 +466,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${RandomNumber:[100,10]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         for (int ndx = 0; ndx != 10; ndx++)
         {
             var result = templateTagsBuilder.Parse(expression, tagValues);
@@ -488,7 +488,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${RandomString:[10]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -504,7 +504,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample=[default:(int)10]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -520,7 +520,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample=[default:(string)data_text]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -536,7 +536,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample=[default:(datetime)2024/11/01 12:00:00]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -552,7 +552,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample=[default:(datetime)2024/11/01 12:00:00][format:yyyy]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -568,7 +568,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample=[default:(datetime)2024/11/01 12:00:00][format:MM]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -586,7 +586,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample=[default:(" + keyFormat + ")2024/11/01]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -602,7 +602,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample=[default:(bool)true]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -618,7 +618,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample=[default:(bool)false]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -636,7 +636,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample=[default:(" + keyFormat + ")12:00:00]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -652,7 +652,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample=[default:(decimal)10.5]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -668,7 +668,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample=[default:(double)10.5]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act.
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -684,7 +684,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample:[default:(int)10]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act. 
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -701,7 +701,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var tagValues = templateTagsBuilder.GetStandardTags();
         tagValues.Add("sample", 5);
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act. 
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -717,7 +717,7 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample=[default:(int)10][format:000]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act. 
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
@@ -733,11 +733,29 @@ public class TemplateTagsBuilderTest : IClassFixture<TestFixture>
         var expression = "${sample=[default:asd asdasdj. / asshsd]}";
         var tagValues = templateTagsBuilder.GetStandardTags();
 
-        // Act. Ensure that the random number is between 0 and 9 generating few cases
+        // Act. 
         var result = templateTagsBuilder.Parse(expression, tagValues);
 
         // Assert
         result.ShouldNotBeNullOrEmpty();
         result.ShouldBe("asd asdasdj. / asshsd");
+    }
+
+    [Fact]
+    public void Parse_Escaped()
+    {
+        // Arrange
+        var templateTagsBuilder = new TemplateTagsBuilder();
+        var expression = "${sample} $${{sample}}";
+        var tagValues = templateTagsBuilder.GetStandardTags();
+
+        tagValues.Add("sample", "xxxxxxxxxxxxxxx");
+
+        // Act.
+        var result = templateTagsBuilder.Parse(expression, tagValues);
+
+        // Assert
+        result.ShouldNotBeNullOrEmpty();
+        result.ShouldBe("xxxxxxxxxxxxxxx ${sample}");
     }
 }

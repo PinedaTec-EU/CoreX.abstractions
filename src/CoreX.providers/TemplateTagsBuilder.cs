@@ -53,8 +53,10 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
     // ${same.value:[default:(bool)true]}
     // ${same.value:[default:(decimal)10,4]}
     // ${same.value:[format: asasdas][default:10]}
+    // $${{same.value}} // Escaped
 
     private readonly string _regularPattern = @"\$\{(?'var'\w+(?:[:|\.]*\w+)*)(?:(?'extended'[=:]?(\[.*?\]))?)\}";
+    private readonly string _escapedPattern = @"\$\$\{\{(?'var'\w+(?:[:|\.]*\w+)*)(?:(?'extended'[=:]?(\[.*?\]))?)\}\}";
     private readonly string _randomNumberPattern = @"\$\{randomnumber:\[(?'min'\d+)(?:\s*,\s*(?'max'\d+))?\]\}";
     private readonly string _randomStringPattern = @"\$\{randomstring:\[(?'length'\d+)\]\}";
     private readonly string _extendedPattern = @"(?'format'\[format:(?'formvalue'.*?)\])|(?'default'\[default:(?'defvalue'.*?)\])";
@@ -135,6 +137,7 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
         {
             if (iteration > 0)
             {
+                expression = this.ParseEscaped(expression);
                 _logger.Trace("Finished parsing expression");
             }
             else
@@ -174,6 +177,35 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
         }
 
         return this.Parse(resolvedExpression, iteration + 1, tagValues, section, exceptionNotResolved, cryptoProvider);
+    }
+
+    private string ParseEscaped(string expression)
+    {
+        _logger.Trace("Parsing escaped expression");
+
+        expression.ThrowArgumentExceptionIfNullOrEmpty(nameof(expression));
+
+        var matches = Regex.Matches(expression, _escapedPattern, RegexOptions.IgnoreCase |
+            RegexOptions.Multiline);
+        string resolvedExpression = expression;
+
+        if (matches.Count == 0)
+        {
+            _logger.Warn("No matches found in expression, and the expression is not resolved!");
+            return expression;
+        }
+
+        StringBuilder sb = new StringBuilder(resolvedExpression);
+        _logger.Debug("Found {0} matches in expression", matches.Count);
+        foreach (Match m in matches)
+        {
+            var key = m.Groups["var"].Value;
+            var gkey = m.Value;
+            var value = "${" + key + "}";
+            this.ReplaceValue(gkey, key, value, sb, false);
+        }
+
+        return sb.ToString();
     }
 
     private void ParseMatch(Dictionary<string, object?> tagValues, IConfigurationSection? section,
