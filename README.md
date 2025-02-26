@@ -1,6 +1,6 @@
 # CoreX.abstractions
 
-Abstractions, extensions
+Abstractions, extensions, aspects, providers
 
 ## Nugets
 
@@ -9,7 +9,7 @@ Abstractions, extensions
 
 ## CoreX.extensions
 
-This project contains several useful extensions for working with collections, strings, and other common .NET data types.
+This project contains several useful [extensions](./.docs/extensions.md) for working with collections, strings, and other common .NET data types.
 
 ### Components
 
@@ -21,7 +21,7 @@ This project provides implementations of providers for different services and fu
 
 ### TemplateTagsBuilder
 
-The **TemplateTagsBuilder** is a utility designed to facilitate the creation and management of template tags within a project. It provides a structured way to define, organize, and manipulate tags that can be used in various templating scenarios, such as generating dynamic content, customizing templates, and managing placeholders.
+The [**TemplateTagsBuilder**](./.docs/providers/TemplateTagsBuilder.md) is a utility designed to facilitate the creation and management of template tags within a project. It provides a structured way to define, organize, and manipulate tags that can be used in various templating scenarios, such as generating dynamic content, customizing templates, and managing placeholders.
 
 ####  Purpose
 
@@ -33,4 +33,4 @@ The **TemplateTagsBuilder** is a utility designed to facilitate the creation and
 
 ## NLogExecutionTimeAttribute
 
-The `NLogExecutionTimeAttribute` is used to log the execution time of methods using NLog. To use this attribute, you need to include `[module: NLogExecutionTimeAttribute]` in one file of the project that will use it.
+The [**NLogExecutionTimeAttribute**](./.docs/aspects/NLogExecutionTimeAttribute.md) is used to log the execution time of methods using NLog. To use this attribute, you need to include `[module: NLogExecutionTimeAttribute]` in one file of the project that will use it.
