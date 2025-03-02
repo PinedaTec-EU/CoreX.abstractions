@@ -45,16 +45,7 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
 {
     private const string msg_NotResolved = "Cannot find a key '{0}', so the expression is not resolved!";
 
-    // Samples
-    // ${same:value}
-    // ${same.value}
-    // ${same.value:[format: asdasdasd]}
-    // ${same.value:[default:(int)10]}
-    // ${same.value:[default:(bool)true]}
-    // ${same.value:[default:(decimal)10,4]}
-    // ${same.value:[format: asasdas][default:10]}
-    // $${{same.value}} // Escaped
-
+    // Regular expression patterns for matching tags
     private readonly string _regularPattern = @"\$\{(?'var'\w+(?:[:|\.]*\w+)*)(?:(?'extended'[=:]?(\[.*?\]))?)\}";
     private readonly string _escapedPattern = @"\$\$\{\{(?'var'\w+(?:[:|\.]*\w+)*)(?:(?'extended'[=:]?(\[.*?\]))?)\}\}";
     private readonly string _randomNumberPattern = @"\$\{randomnumber:\[(?'min'\d+)(?:\s*,\s*(?'max'\d+))?\]\}";
@@ -65,13 +56,16 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
 
     public bool ParseBooleanToLower { get; set; } = true;
 
-    public string SearchPattern { get => _regularPattern; }
+    public string SearchPattern => _regularPattern;
 
     public TemplateTagsBuilder(string? regularExpression = null)
     {
         _regularPattern = regularExpression ?? _regularPattern;
     }
 
+    /// <summary>
+    /// Gets the standard tags and merges them with the provided dictionary.
+    /// </summary>
     public virtual Dictionary<string, object?> GetStandardTags(Dictionary<string, object?> dict)
     {
         var stag = this.GetStandardTags();
@@ -90,6 +84,9 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
         return stag;
     }
 
+    /// <summary>
+    /// Gets the standard tags with predefined values.
+    /// </summary>
     public virtual Dictionary<string, object?> GetStandardTags()
     {
         Dictionary<string, object?> dict = new(StringComparer.InvariantCultureIgnoreCase);
@@ -107,13 +104,15 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
         dict.Add("Now", currentTime);
         dict.Add("HostName", Environment.MachineName);
         dict.Add("MachineName", Environment.MachineName);
-
         dict.Add("CurrentUser", Environment.UserName);
         dict.Add("UserDomainName", Environment.UserDomainName);
 
         return dict;
     }
 
+    /// <summary>
+    /// Parses the given expression and replaces tags with their corresponding values.
+    /// </summary>
     [NLogExecutionTimeAttribute]
     public string Parse(string expression, Dictionary<string, object?>? tagValues = null, IConfigurationSection? section = null,
         bool exceptionNotResolved = false, Func<string, string, string, string>? cryptoProvider = null) =>
@@ -129,8 +128,7 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
 
         tagValues ??= new Dictionary<string, object?>(StringComparer.InvariantCultureIgnoreCase);
 
-        var matches = Regex.Matches(expression, _regularPattern, RegexOptions.IgnoreCase |
-            RegexOptions.Multiline);
+        var matches = Regex.Matches(expression, _regularPattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
         string resolvedExpression = expression;
 
         if (matches.Count == 0)
@@ -161,17 +159,15 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
         {
             if (exceptionNotResolved)
             {
-                StringBuilder sba = new();
+                //                StringBuilder sba = new();
                 var list = matches.Select(m => m.Value);
                 var listText = string.Join(", ", list);
-                sba.Append(listText);
-                //matches.ToList().ForEach(mat => sba.Append(mat.Value));
-                string text = sba.ToString();
+                //                sba.Append(listText);
 
-                throw new InvalidOperationException(string.Format(msg_NotResolved, text));
+                throw new InvalidOperationException(string.Format(msg_NotResolved, listText));
             }
 
-            _logger.Warn("Cannot find a key, so the expression is not completly resolved!");
+            _logger.Warn("Cannot find a key, so the expression is not completely resolved!");
 
             return resolvedExpression;
         }
@@ -185,8 +181,7 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
 
         expression.ThrowArgumentExceptionIfNullOrEmpty(nameof(expression));
 
-        var matches = Regex.Matches(expression, _escapedPattern, RegexOptions.IgnoreCase |
-            RegexOptions.Multiline);
+        var matches = Regex.Matches(expression, _escapedPattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
         string resolvedExpression = expression;
 
         if (matches.Count == 0)
@@ -259,12 +254,9 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
         {
             key = key.Replace("secret:", string.Empty);
         }
-        else
+        else if (shasec)
         {
-            if (shasec)
-            {
-                key = key.Replace("shasec:", string.Empty);
-            }
+            key = key.Replace("shasec:", string.Empty);
         }
 
         return secret;
@@ -292,21 +284,15 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
     {
         var extended = match.Groups["extended"].Value;
 
-        var matches = Regex.Matches(extended, _extendedPattern, RegexOptions.IgnoreCase |
-            RegexOptions.Multiline);
+        var matches = Regex.Matches(extended, _extendedPattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
-        if (matches.Count == 0)
-        {
-            throw new InvalidOperationException(
-                string.Format(msg_NotResolved, extended));
-        }
+        (matches.Count == 0).ThrowExceptionIfTrue<InvalidOperationException>(string.Format(msg_NotResolved, extended));
 
         var value = matches[0].Groups["defvalue"].Value;
         var objValue = TemplateTagsBuilder.ConvertToType(value);
 
         value = TemplateTagsBuilder.FormatObject(objValue, format)!;
         this.ReplaceValue(gkey, key, value, sb, secret, cryptoProvider);
-        return;
     }
 
     private string GetExtendedFormat(Match match)
@@ -314,8 +300,7 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
         var format = string.Empty;
         if (match.Groups["extended"].Success)
         {
-            var matches = Regex.Matches(match.Value, _extendedPattern, RegexOptions.IgnoreCase |
-                RegexOptions.Multiline);
+            var matches = Regex.Matches(match.Value, _extendedPattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
             var em = matches.FirstOrDefault(em => em.Groups["formvalue"].Success);
             if (em is not null)
@@ -338,7 +323,7 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
 
         if (typeValuePair.Length != 2)
         {
-            typeValuePair = ["string", input];
+            typeValuePair = new[] { "string", input };
         }
 
         string type = typeValuePair[0].Trim();
@@ -367,26 +352,20 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
             return default;
         }
 
-        if (format.IsNullOrEmpty())
+        if (string.IsNullOrEmpty(format))
         {
             return value.ToString();
         }
 
-        switch (value)
+        return value switch
         {
-            case DateTime dateTime:
-                return dateTime.ToString(format, CultureInfo.InvariantCulture);
-            case int intValue:
-                return intValue.ToString(format, CultureInfo.InvariantCulture);
-            case double doubleValue:
-                return doubleValue.ToString(format, CultureInfo.InvariantCulture);
-            case decimal decimalValue:
-                return decimalValue.ToString(format, CultureInfo.InvariantCulture);
-            case IFormattable formattable:
-                return formattable.ToString(format, CultureInfo.InvariantCulture);
-            default:
-                throw new ArgumentException("Unsupported type for formatting", nameof(value));
-        }
+            DateTime dateTime => dateTime.ToString(format, CultureInfo.InvariantCulture),
+            int intValue => intValue.ToString(format, CultureInfo.InvariantCulture),
+            double doubleValue => doubleValue.ToString(format, CultureInfo.InvariantCulture),
+            decimal decimalValue => decimalValue.ToString(format, CultureInfo.InvariantCulture),
+            IFormattable formattable => formattable.ToString(format, CultureInfo.InvariantCulture),
+            _ => throw new ArgumentException("Unsupported type for formatting", nameof(value))
+        };
     }
 
     private static bool IsReservedKeyword(string key) =>
@@ -419,8 +398,7 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
     {
         _logger.Trace("Generating random string");
 
-        var matches = Regex.Matches(match.Value, _randomStringPattern, RegexOptions.IgnoreCase |
-            RegexOptions.Multiline);
+        var matches = Regex.Matches(match.Value, _randomStringPattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
         if (matches.Count == 0)
         {
@@ -435,14 +413,9 @@ public class TemplateTagsBuilder : ITemplateTagsBuilder
     {
         _logger.Trace("Generating random number");
 
-        var matches = Regex.Matches(match.Value, _randomNumberPattern, RegexOptions.IgnoreCase |
-            RegexOptions.Multiline);
+        var matches = Regex.Matches(match.Value, _randomNumberPattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
-        if (matches.Count == 0)
-        {
-            throw new InvalidOperationException(
-                string.Format(msg_NotResolved, match.Value));
-        }
+        (matches.Count == 0).ThrowExceptionIfTrue<InvalidOperationException>(string.Format(msg_NotResolved, match.Value));
 
         var minLength = int.Parse(matches[0].Groups["min"].Value);
         var maxLength = 0;
