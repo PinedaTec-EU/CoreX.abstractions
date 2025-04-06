@@ -511,4 +511,44 @@ public class AppsHelperTest
         externalCTS.IsCancellationRequested.ShouldBeFalse();
         internalCTS.IsCancellationRequested.ShouldBeTrue();
     }
+
+    [Fact]
+    public void GetAcronimCallerName_Valid()
+    {
+        var acronim = AppsHelper.GetAcronimCallerName(false, false, "GetAcronimCallerName_Valid");
+
+        acronim.ShouldNotBeNullOrEmpty();
+        acronim.ShouldBe("gacnv");
+    }
+
+    [Fact]
+    public void GetAcronimCallerName_Valid_RandomNumber()
+    {
+        var acronim = AppsHelper.GetAcronimCallerName(true, true, "GetAcronimCallerName_Valid");
+
+        acronim.ShouldNotBeNullOrEmpty();
+        acronim.ShouldNotBe("gacnv");
+
+        acronim.Split('.').Length.ShouldBe(2);
+        acronim.Split('.').First().ShouldBe("gacnv");
+        acronim.Split('.').Last().ShouldNotBeNullOrEmpty();
+    }
+
+    [Fact]
+    public void GetAcronimCallerName_Valid_Twice()
+    {
+        var acronim1 = AppsHelper.GetAcronimCallerName(false, true, nameof(GetAcronimCallerName_Valid_Twice));
+        var acronim2 = AppsHelper.GetAcronimCallerName(false, true, nameof(GetAcronimCallerName_Valid_Twice));
+
+        acronim1.ShouldBe(acronim2);
+    }
+
+    [Fact]
+    public void GetAcronimCallerName_Valid_DuplicatedAcronim()
+    {
+        var acronim1 = AppsHelper.GetAcronimCallerName(false, true, "other_" + nameof(GetAcronimCallerName_Valid_DuplicatedAcronim));
+        var acronim2 = AppsHelper.GetAcronimCallerName(false, true, nameof(GetAcronimCallerName_Valid_DuplicatedAcronim));
+
+        acronim1.ShouldNotBe(acronim2);
+    }
 }

@@ -574,27 +574,49 @@ public static class AppsHelper
     /// <param name="randomNumber"></param>
     /// <param name="caller"></param>
     /// <returns></returns>
-    [DebuggerStepThrough]
-    public static string GetAcronimCallerName(bool randomNumber = false, [ConstantExpected][CallerMemberName] string caller = "")
-    {
-        var acronim = string.Empty;
+    private static Dictionary<string, string> _acronimCache = new Dictionary<string, string>();
 
-        _ = caller.ToCharArray().Select<char, char?>(c =>
+    [DebuggerStepThrough]
+    public static string GetAcronimCallerName(bool randomNumber = false, bool upperCase = false, [ConstantExpected][CallerMemberName] string caller = "")
+    {
+        string acronim = string.Empty;
+
+        if (_acronimCache.TryGetValue(caller, out string? result))
+        {
+            return result!;
+        }
+
+        caller.ToCharArray().Select(delegate (char c)
         {
             if (char.IsUpper(c))
             {
-                acronim += c;
+                ReadOnlySpan<char> readOnlySpan = acronim;
+                char reference = c;
+                acronim = string.Concat(readOnlySpan, new ReadOnlySpan<char>(ref reference));
             }
 
-            return null; // Return a value to satisfy the Select method
+            return (char?)null;
         }).ToList();
+
+        // search for an acronim in the cache
+        if (_acronimCache.ContainsValue(acronim))
+        {
+            randomNumber = true;
+        }
 
         if (randomNumber)
         {
-            acronim += "." + RandomNumberGenerator.GetInt32(1000, 9999);
+            acronim = acronim + "." + RandomNumberGenerator.GetInt32(1000, 9999);
         }
 
-        return acronim.ToLower();
+        if (!upperCase)
+        {
+            acronim = acronim.ToLower();
+        }
+
+        _acronimCache[caller] = acronim;
+
+        return acronim;
     }
 
     /// <summary>
