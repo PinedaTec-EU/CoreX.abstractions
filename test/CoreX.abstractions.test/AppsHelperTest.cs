@@ -515,7 +515,7 @@ public class AppsHelperTest
     [Fact]
     public void GetAcronimCallerName_Valid()
     {
-        var acronim = AppsHelper.GetAcronimCallerName(false, false, "GetAcronimCallerName_Valid");
+        var acronim = AppsHelper.GetAcronimCallerName(false, false, nameof(GetAcronimCallerName_Valid));
 
         acronim.ShouldNotBeNullOrEmpty();
         acronim.ShouldBe("gacnv");
@@ -524,13 +524,13 @@ public class AppsHelperTest
     [Fact]
     public void GetAcronimCallerName_Valid_RandomNumber()
     {
-        var acronim = AppsHelper.GetAcronimCallerName(true, true, "GetAcronimCallerName_Valid");
+        var acronim = AppsHelper.GetAcronimCallerName(true, true, nameof(GetAcronimCallerName_Valid_RandomNumber));
 
         acronim.ShouldNotBeNullOrEmpty();
-        acronim.ShouldNotBe("gacnv");
+        acronim.ShouldNotBe("GACNVRN");
 
         acronim.Split('.').Length.ShouldBe(2);
-        acronim.Split('.').First().ShouldBe("gacnv");
+        acronim.Split('.').First().ShouldBe("GACNVRN");
         acronim.Split('.').Last().ShouldNotBeNullOrEmpty();
     }
 
