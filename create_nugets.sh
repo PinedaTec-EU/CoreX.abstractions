@@ -29,4 +29,4 @@ nuget pack src/CoreX.providers/.nuspec -Version $new_version -outputdirectory ./
 cp ./nugets/CoreX.*.$new_version.nupkg ../nugets
 
 # Publicar el paquete NuGet to metheora
-dotnet nuget push -s http://metheora.pinedatec.eu.local:30555/v3/index.json ./nugets/CoreX.*.$new_version.nupkg 
+dotnet nuget push -s http://metheora.pinedatec.eu.local:30555/v3/index.json ./nugets/CoreX.*.$new_version.nupkg -k 17jcPoAE3cgdtTjtPyHsoF3K 
