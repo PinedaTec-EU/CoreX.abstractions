@@ -5,3 +5,5 @@
 
 **/.terraform*
 nuget.config
+
+**/*.lic
