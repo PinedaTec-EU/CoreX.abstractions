@@ -581,7 +581,7 @@ public static class AppsHelper
         GetAcronimCallerName(false, false, caller);
 
     [DebuggerStepThrough]
-    public static string GetAcronimCallerName(bool randomNumber = false, bool upperCase = false, [ConstantExpected][CallerMemberName] string caller = "")
+    public static string GetAcronimCallerName(bool randomNumber, bool upperCase, [ConstantExpected][CallerMemberName] string caller = "")
     {
         string acronim = string.Empty;
 
