@@ -577,6 +577,10 @@ public static class AppsHelper
     private static Dictionary<string, string> _acronimCache = new Dictionary<string, string>();
 
     [DebuggerStepThrough]
+    public static string GetAcronimCallerName([ConstantExpected][CallerMemberName] string caller = "") =>
+        GetAcronimCallerName(false, false, caller);
+
+    [DebuggerStepThrough]
     public static string GetAcronimCallerName(bool randomNumber = false, bool upperCase = false, [ConstantExpected][CallerMemberName] string caller = "")
     {
         string acronim = string.Empty;
