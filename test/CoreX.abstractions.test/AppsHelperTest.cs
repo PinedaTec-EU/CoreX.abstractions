@@ -522,6 +522,15 @@ public class AppsHelperTest
     }
 
     [Fact]
+    public void GetAcronimCallerName_Lowercase()
+    {
+        var acronim = AppsHelper.GetAcronimCallerName(false, false, "getacronimcallername_lowercase");
+
+        acronim.ShouldNotBeNullOrEmpty();
+        acronim.ShouldBe("getacronimcallername_lowercase");
+    }
+
+    [Fact]
     public void GetAcronimCallerName_Valid_RandomNumber()
     {
         var acronim = AppsHelper.GetAcronimCallerName(true, true, nameof(GetAcronimCallerName_Valid_RandomNumber));

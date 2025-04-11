@@ -41,7 +41,7 @@ using NLog;
 
 namespace CoreX.extensions;
 
-[DebuggerStepThrough]
+// [DebuggerStepThrough]
 public static class AppsHelper
 {
     private static readonly ILogger _logger = LogManager.GetCurrentClassLogger();
@@ -555,7 +555,6 @@ public static class AppsHelper
     /// <param name="obj"></param>
     /// <param name="caller"></param>
     /// <returns></returns>
-    [DebuggerStepThrough]
     public static string GetCallerName(this object obj, [ConstantExpected][CallerMemberName] string caller = "") =>
          caller;
 
@@ -564,7 +563,6 @@ public static class AppsHelper
     /// </summary>
     /// <param name="caller"></param>
     /// <returns></returns>
-    [DebuggerStepThrough]
     public static string GetCallerName([CallerMemberName] string caller = "") =>
          caller;
 
@@ -576,11 +574,9 @@ public static class AppsHelper
     /// <returns></returns>
     private static Dictionary<string, string> _acronimCache = new Dictionary<string, string>();
 
-    [DebuggerStepThrough]
     public static string GetAcronimCallerName([ConstantExpected][CallerMemberName] string caller = "") =>
         GetAcronimCallerName(false, false, caller);
 
-    [DebuggerStepThrough]
     public static string GetAcronimCallerName(bool randomNumber, bool upperCase, [ConstantExpected][CallerMemberName] string caller = "")
     {
         string acronim = string.Empty;
@@ -590,17 +586,22 @@ public static class AppsHelper
             return result!;
         }
 
-        caller.ToCharArray().Select(delegate (char c)
+        caller.ToCharArray().Select(delegate (char chr)
         {
-            if (char.IsUpper(c))
+            if (char.IsUpper(chr))
             {
                 ReadOnlySpan<char> readOnlySpan = acronim;
-                char reference = c;
+                char reference = chr;
                 acronim = string.Concat(readOnlySpan, new ReadOnlySpan<char>(ref reference));
             }
 
             return (char?)null;
         }).ToList();
+
+        if (acronim.IsNullOrEmpty())
+        {
+            acronim = caller;
+        }
 
         // search for an acronim in the cache
         if (_acronimCache.ContainsValue(acronim))
